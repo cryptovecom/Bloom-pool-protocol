@@ -33,6 +33,7 @@ The constructor of the contract allows for easy deployment of new Billy pools.
 - `string memory name`: The ERC20-name the lender share token should have
 - `string memory symbol`: The ERC20-symbol the lender share token should have
 
+
 ### Deposit
 
 Lenders and borrowers are matched on a first-come-first-serve basis. Once the commit phase ends, the
@@ -44,6 +45,7 @@ contract processes the commitments and matches the lenders and borrowers based o
 
 - `depositLender(uint256 amount)`: Lenders deposit a specified amount of stablecoins. The deposited
   amount must be greater than 0.
+
 
 ### Process
 
@@ -58,6 +60,7 @@ of refunds for unmatched parties.
   Calculates the included and excluded amounts based on the total assets committed by borrowers and
   the leverage. Mints shares for the lender based on the included amount and refunds any unmatched
   amounts to the lender.
+
 
 ### Withdraw
 
@@ -81,12 +84,16 @@ The contract has several states and transitions between them based on the curren
 6. `State.PendingPostHoldSwap`: The post-hold swap is initiated and pending completion.
 7. `State.EmergencyExit`: The pre-hold swap has exceeded the allotted time for swapping and swaps are not completed.
 8. `State.FinalWithdraw`: The post-hold swap is completed, and users can withdraw their share of the returned stablecoins.
+
  
 ### Emergency Withdraw
 
 - `emergencyWithdrawTo(address)`: Allows the Emergency handler to withdraw the underlying and tokenized tokens in the event of the swap facility not completing swapping during the allotted amount of time, only then can the emergency handler unwind the process. 
 
+
+
 ## Integrations: Swap Facility & Whitelist
+
 
 ### Swap Facility
 
@@ -107,6 +114,7 @@ critcial, it **must** equal the amount of tokens actually transferred to the poo
 is less than the actual amount the difference will be permanently stuck, conversely if `outAmount`
 is larger than the actual amount the pool will be insolvent, introducing a race condition whereby
 it will not allow all parties to be fully paid out.
+
 
 ### Whitelist
 
